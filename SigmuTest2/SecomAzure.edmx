@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DW_CRMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="F_CUST_ACCOUNT_CRM">
+          <Key>
+            <PropertyRef Name="MOBILE_NO" />
+          </Key>
+          <Property Name="CONT_ID" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="SERVICE_ID" Type="varchar" MaxLength="6" />
+          <Property Name="CUST_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOBILE_NO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="CUST_ACC_ADDR" Type="nvarchar" MaxLength="80" />
+          <Property Name="ZIP_ID" Type="varchar" MaxLength="5" />
+          <Property Name="COUNTY_NAME" Type="nvarchar" MaxLength="10" />
+          <Property Name="TOWN_NAME" Type="nvarchar" MaxLength="20" />
+          <Property Name="RSYS_ID" Type="varchar" MaxLength="2" />
+          <Property Name="SERVICE_TYPE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="TRANS_DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'DW_CRM.dbo.F_SP_PROCESS' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="F_SP_PROCESS">
+          <Key>
+            <PropertyRef Name="SP_NAME" />
+          </Key>
+          <Property Name="SP_NAME" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LAST_TRANS_VALUE" Type="varchar" MaxLength="100" />
+          <Property Name="RECALL_DAY" Type="int" />
+          <Property Name="TRUNCATE_FLAG" Type="bit" />
+          <Property Name="RUN_MESSAGE" Type="nvarchar(max)" />
+          <Property Name="MEMO" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityContainer Name="DW_CRMModelStoreContainer">
+          <EntitySet Name="F_CUST_ACCOUNT_CRM" EntityType="Self.F_CUST_ACCOUNT_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="F_SP_PROCESS" EntityType="Self.F_SP_PROCESS" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [F_SP_PROCESS].[SP_NAME] AS [SP_NAME], 
+    [F_SP_PROCESS].[LAST_TRANS_VALUE] AS [LAST_TRANS_VALUE], 
+    [F_SP_PROCESS].[RECALL_DAY] AS [RECALL_DAY], 
+    [F_SP_PROCESS].[TRUNCATE_FLAG] AS [TRUNCATE_FLAG], 
+    [F_SP_PROCESS].[RUN_MESSAGE] AS [RUN_MESSAGE], 
+    [F_SP_PROCESS].[MEMO] AS [MEMO]
+    FROM [dbo].[F_SP_PROCESS] AS [F_SP_PROCESS]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DW_CRMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="F_CUST_ACCOUNT_CRM">
+          <Key>
+            <PropertyRef Name="MOBILE_NO" />
+          </Key>
+          <Property Name="CONT_ID" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SERVICE_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOBILE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_ACC_ADDR" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ZIP_ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="COUNTY_NAME" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TOWN_NAME" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RSYS_ID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SERVICE_TYPE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="TRANS_DATE" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="DW_CRMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="F_CUST_ACCOUNT_CRM" EntityType="Self.F_CUST_ACCOUNT_CRM" />
+          <EntitySet Name="F_SP_PROCESS" EntityType="DW_CRMModel.F_SP_PROCESS" />
+        </EntityContainer>
+        <EntityType Name="F_SP_PROCESS">
+          <Key>
+            <PropertyRef Name="SP_NAME" />
+          </Key>
+          <Property Name="SP_NAME" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LAST_TRANS_VALUE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RECALL_DAY" Type="Int32" />
+          <Property Name="TRUNCATE_FLAG" Type="Boolean" />
+          <Property Name="RUN_MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MEMO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DW_CRMModelStoreContainer" CdmEntityContainer="DW_CRMEntities">
+          <EntitySetMapping Name="F_CUST_ACCOUNT_CRM">
+            <EntityTypeMapping TypeName="DW_CRMModel.F_CUST_ACCOUNT_CRM">
+              <MappingFragment StoreEntitySet="F_CUST_ACCOUNT_CRM">
+                <ScalarProperty Name="CONT_ID" ColumnName="CONT_ID" />
+                <ScalarProperty Name="SERVICE_ID" ColumnName="SERVICE_ID" />
+                <ScalarProperty Name="CUST_NAME" ColumnName="CUST_NAME" />
+                <ScalarProperty Name="MOBILE_NO" ColumnName="MOBILE_NO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CUST_ACC_ADDR" ColumnName="CUST_ACC_ADDR" />
+                <ScalarProperty Name="ZIP_ID" ColumnName="ZIP_ID" />
+                <ScalarProperty Name="COUNTY_NAME" ColumnName="COUNTY_NAME" />
+                <ScalarProperty Name="TOWN_NAME" ColumnName="TOWN_NAME" />
+                <ScalarProperty Name="RSYS_ID" ColumnName="RSYS_ID" />
+                <ScalarProperty Name="SERVICE_TYPE" ColumnName="SERVICE_TYPE" />
+                <ScalarProperty Name="TRANS_DATE" ColumnName="TRANS_DATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F_SP_PROCESS">
+            <EntityTypeMapping TypeName="DW_CRMModel.F_SP_PROCESS">
+              <MappingFragment StoreEntitySet="F_SP_PROCESS">
+                <ScalarProperty Name="MEMO" ColumnName="MEMO" />
+                <ScalarProperty Name="RUN_MESSAGE" ColumnName="RUN_MESSAGE" />
+                <ScalarProperty Name="TRUNCATE_FLAG" ColumnName="TRUNCATE_FLAG" />
+                <ScalarProperty Name="RECALL_DAY" ColumnName="RECALL_DAY" />
+                <ScalarProperty Name="LAST_TRANS_VALUE" ColumnName="LAST_TRANS_VALUE" />
+                <ScalarProperty Name="SP_NAME" ColumnName="SP_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
