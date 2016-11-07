@@ -9,7 +9,7 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
-namespace SigmuTest2
+namespace SyncSeomcMember
 {
     class ContactModel
     {
@@ -109,6 +109,7 @@ namespace SigmuTest2
             /// </summary>
             public string checkCode { get; set; }
 
+            public bool fisrtSend { get; set; }
         }
 
 

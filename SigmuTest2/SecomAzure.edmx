@@ -22,6 +22,32 @@
           <Property Name="SERVICE_TYPE" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="TRANS_DATE" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="F_CUST_ACCOUNT_CRM_BD">
+          <Key>
+            <PropertyRef Name="CUST_ACC_IDNO" />
+            <PropertyRef Name="MOBILE_NO" />
+          </Key>
+          <Property Name="CUST_ACC_IDNO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CONT_ID" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="SERVICE_ID" Type="varchar" MaxLength="6" />
+          <Property Name="CUST_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOBILE_NO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RSYS_ID" Type="varchar" MaxLength="2" />
+          <Property Name="SERVICE_TYPE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="TRANS_DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="F_CUST_ACCOUNT_CRM_BM">
+          <Key>
+            <PropertyRef Name="CUST_ACC_IDNO" />
+          </Key>
+          <Property Name="CUST_ACC_IDNO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CUST_ACC_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="CUST_ACC_ADDR" Type="nvarchar" MaxLength="80" />
+          <Property Name="SRV_FEE" Type="decimal" Precision="11" Scale="0" />
+          <Property Name="BILLING_AMT" Type="decimal" Precision="11" Scale="0" />
+          <Property Name="SERVICE_TYPE" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="TRANS_DATE" Type="datetime" Nullable="false" />
+        </EntityType>
         <!--產生期間發現錯誤:
 警告 6002: 資料表/檢視 'DW_CRM.dbo.F_SP_PROCESS' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="F_SP_PROCESS">
@@ -37,6 +63,8 @@
         </EntityType>
         <EntityContainer Name="DW_CRMModelStoreContainer">
           <EntitySet Name="F_CUST_ACCOUNT_CRM" EntityType="Self.F_CUST_ACCOUNT_CRM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="F_CUST_ACCOUNT_CRM_BD" EntityType="Self.F_CUST_ACCOUNT_CRM_BD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="F_CUST_ACCOUNT_CRM_BM" EntityType="Self.F_CUST_ACCOUNT_CRM_BM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="F_SP_PROCESS" EntityType="Self.F_SP_PROCESS" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [F_SP_PROCESS].[SP_NAME] AS [SP_NAME], 
@@ -72,6 +100,8 @@
         <EntityContainer Name="DW_CRMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="F_CUST_ACCOUNT_CRM" EntityType="Self.F_CUST_ACCOUNT_CRM" />
           <EntitySet Name="F_SP_PROCESS" EntityType="DW_CRMModel.F_SP_PROCESS" />
+          <EntitySet Name="F_CUST_ACCOUNT_CRM_BD" EntityType="DW_CRMModel.F_CUST_ACCOUNT_CRM_BD" />
+          <EntitySet Name="F_CUST_ACCOUNT_CRM_BM" EntityType="DW_CRMModel.F_CUST_ACCOUNT_CRM_BM" />
         </EntityContainer>
         <EntityType Name="F_SP_PROCESS">
           <Key>
@@ -83,6 +113,32 @@
           <Property Name="TRUNCATE_FLAG" Type="Boolean" />
           <Property Name="RUN_MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MEMO" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="F_CUST_ACCOUNT_CRM_BD">
+          <Key>
+            <PropertyRef Name="CUST_ACC_IDNO" />
+            <PropertyRef Name="MOBILE_NO" />
+          </Key>
+          <Property Name="CUST_ACC_IDNO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CONT_ID" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="SERVICE_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOBILE_NO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RSYS_ID" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="SERVICE_TYPE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TRANS_DATE" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="F_CUST_ACCOUNT_CRM_BM">
+          <Key>
+            <PropertyRef Name="CUST_ACC_IDNO" />
+          </Key>
+          <Property Name="CUST_ACC_IDNO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CUST_ACC_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CUST_ACC_ADDR" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="SRV_FEE" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="BILLING_AMT" Type="Decimal" Precision="11" Scale="0" />
+          <Property Name="SERVICE_TYPE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="TRANS_DATE" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -117,6 +173,33 @@
                 <ScalarProperty Name="RECALL_DAY" ColumnName="RECALL_DAY" />
                 <ScalarProperty Name="LAST_TRANS_VALUE" ColumnName="LAST_TRANS_VALUE" />
                 <ScalarProperty Name="SP_NAME" ColumnName="SP_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F_CUST_ACCOUNT_CRM_BD">
+            <EntityTypeMapping TypeName="DW_CRMModel.F_CUST_ACCOUNT_CRM_BD">
+              <MappingFragment StoreEntitySet="F_CUST_ACCOUNT_CRM_BD">
+                <ScalarProperty Name="TRANS_DATE" ColumnName="TRANS_DATE" />
+                <ScalarProperty Name="SERVICE_TYPE" ColumnName="SERVICE_TYPE" />
+                <ScalarProperty Name="RSYS_ID" ColumnName="RSYS_ID" />
+                <ScalarProperty Name="MOBILE_NO" ColumnName="MOBILE_NO" />
+                <ScalarProperty Name="CUST_NAME" ColumnName="CUST_NAME" />
+                <ScalarProperty Name="SERVICE_ID" ColumnName="SERVICE_ID" />
+                <ScalarProperty Name="CONT_ID" ColumnName="CONT_ID" />
+                <ScalarProperty Name="CUST_ACC_IDNO" ColumnName="CUST_ACC_IDNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="F_CUST_ACCOUNT_CRM_BM">
+            <EntityTypeMapping TypeName="DW_CRMModel.F_CUST_ACCOUNT_CRM_BM">
+              <MappingFragment StoreEntitySet="F_CUST_ACCOUNT_CRM_BM">
+                <ScalarProperty Name="TRANS_DATE" ColumnName="TRANS_DATE" />
+                <ScalarProperty Name="SERVICE_TYPE" ColumnName="SERVICE_TYPE" />
+                <ScalarProperty Name="BILLING_AMT" ColumnName="BILLING_AMT" />
+                <ScalarProperty Name="SRV_FEE" ColumnName="SRV_FEE" />
+                <ScalarProperty Name="CUST_ACC_ADDR" ColumnName="CUST_ACC_ADDR" />
+                <ScalarProperty Name="CUST_ACC_NAME" ColumnName="CUST_ACC_NAME" />
+                <ScalarProperty Name="CUST_ACC_IDNO" ColumnName="CUST_ACC_IDNO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

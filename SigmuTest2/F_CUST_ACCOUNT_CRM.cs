@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SigmuTest2
+namespace SyncSeomcMember
 {
     using System;
     using System.Collections.Generic;

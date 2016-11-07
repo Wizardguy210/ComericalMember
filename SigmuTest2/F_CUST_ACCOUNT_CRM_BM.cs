@@ -12,13 +12,14 @@ namespace SyncSeomcMember
     using System;
     using System.Collections.Generic;
     
-    public partial class F_SP_PROCESS
+    public partial class F_CUST_ACCOUNT_CRM_BM
     {
-        public string SP_NAME { get; set; }
-        public string LAST_TRANS_VALUE { get; set; }
-        public Nullable<int> RECALL_DAY { get; set; }
-        public Nullable<bool> TRUNCATE_FLAG { get; set; }
-        public string RUN_MESSAGE { get; set; }
-        public string MEMO { get; set; }
+        public string CUST_ACC_IDNO { get; set; }
+        public string CUST_ACC_NAME { get; set; }
+        public string CUST_ACC_ADDR { get; set; }
+        public Nullable<decimal> SRV_FEE { get; set; }
+        public Nullable<decimal> BILLING_AMT { get; set; }
+        public string SERVICE_TYPE { get; set; }
+        public System.DateTime TRANS_DATE { get; set; }
     }
 }

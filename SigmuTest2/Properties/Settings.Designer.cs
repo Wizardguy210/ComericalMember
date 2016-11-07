@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SigmuTest2.Properties {
+namespace SyncSeomcMember.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

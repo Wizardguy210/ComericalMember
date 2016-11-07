@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SigmuTest2
+namespace SyncSeomcMember
 {
     using System;
     using System.Data.Entity;
@@ -27,5 +27,7 @@ namespace SigmuTest2
     
         public virtual DbSet<F_CUST_ACCOUNT_CRM> F_CUST_ACCOUNT_CRM { get; set; }
         public virtual DbSet<F_SP_PROCESS> F_SP_PROCESS { get; set; }
+        public virtual DbSet<F_CUST_ACCOUNT_CRM_BD> F_CUST_ACCOUNT_CRM_BD { get; set; }
+        public virtual DbSet<F_CUST_ACCOUNT_CRM_BM> F_CUST_ACCOUNT_CRM_BM { get; set; }
     }
 }
