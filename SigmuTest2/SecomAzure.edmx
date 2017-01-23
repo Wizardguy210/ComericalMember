@@ -47,9 +47,13 @@
           <Property Name="BILLING_AMT" Type="decimal" Precision="11" Scale="0" />
           <Property Name="SERVICE_TYPE" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="TRANS_DATE" Type="datetime" Nullable="false" />
+          <Property Name="ZIP_ID" Type="varchar" MaxLength="5" />
+          <Property Name="COUNTY_NAME" Type="nvarchar" MaxLength="10" />
+          <Property Name="TOWN_NAME" Type="nvarchar" MaxLength="10" />
+          <Property Name="GEOCODING_TAG" Type="bit" />
         </EntityType>
-        <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'DW_CRM.dbo.F_SP_PROCESS' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'DW_CRM.dbo.F_SP_PROCESS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="F_SP_PROCESS">
           <Key>
             <PropertyRef Name="SP_NAME" />
@@ -139,6 +143,10 @@
           <Property Name="BILLING_AMT" Type="Decimal" Precision="11" Scale="0" />
           <Property Name="SERVICE_TYPE" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="TRANS_DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ZIP_ID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="COUNTY_NAME" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TOWN_NAME" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="GEOCODING_TAG" Type="Boolean" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -193,6 +201,10 @@
           <EntitySetMapping Name="F_CUST_ACCOUNT_CRM_BM">
             <EntityTypeMapping TypeName="DW_CRMModel.F_CUST_ACCOUNT_CRM_BM">
               <MappingFragment StoreEntitySet="F_CUST_ACCOUNT_CRM_BM">
+                <ScalarProperty Name="GEOCODING_TAG" ColumnName="GEOCODING_TAG" />
+                <ScalarProperty Name="TOWN_NAME" ColumnName="TOWN_NAME" />
+                <ScalarProperty Name="COUNTY_NAME" ColumnName="COUNTY_NAME" />
+                <ScalarProperty Name="ZIP_ID" ColumnName="ZIP_ID" />
                 <ScalarProperty Name="TRANS_DATE" ColumnName="TRANS_DATE" />
                 <ScalarProperty Name="SERVICE_TYPE" ColumnName="SERVICE_TYPE" />
                 <ScalarProperty Name="BILLING_AMT" ColumnName="BILLING_AMT" />
