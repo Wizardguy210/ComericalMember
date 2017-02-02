@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SyncSeomcMember
+namespace SyncSecomMember
 {
     using System;
     using System.Collections.Generic;

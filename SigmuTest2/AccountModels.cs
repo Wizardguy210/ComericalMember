@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace SyncSeomcMember
+namespace SyncSecomMember
 {
     public class CreateAccountPost
     {
@@ -68,58 +63,9 @@ namespace SyncSeomcMember
         /// </value>
         [StringLength(50, ErrorMessage = "mainResidentialLine1最長50碼")]
         public string mainResidentialLine1 { get; set; }
-
-        /// <summary>
-        /// 居住地址:街道 2
-        /// </summary>
-        /// <value>
-        /// The main residential line2.
-        /// </value>
-        [StringLength(50, ErrorMessage = "mainResidentialLine2最長50碼")]
-        public string mainResidentialLine2 { get; set; }
-
-        /// <summary>
-        /// 居住地址:街道 3
-        /// </summary>
-        /// <value>
-        /// The main residential line3.
-        /// </value>
-        [StringLength(50, ErrorMessage = "mainResidentialLine3最長50碼")]
-        public string mainResidentialLine3 { get; set; }
         /// <summary>
         /// 檢核碼
         /// </summary>
         public string checkCode { get; set; }
-    }
-    public class CreateAccountResponse
-    {
-        /// <summary>
-        /// 錯誤訊息
-        /// </summary>
-        /// <value>
-        /// The return code.
-        /// </value>
-        public string returnCode { get; set; }
-        /// <summary>
-        /// Gets or sets the return MSG.
-        /// </summary>
-        /// <value>
-        /// The return MSG.
-        /// </value>
-        public string returnMsg { get; set; }
-        /// <summary>
-        /// 公司統一編編號
-        /// </summary>
-        /// <value>
-        /// The company identifier.
-        /// </value>
-        public string companyId { get; set; }
-        /// <summary>
-        /// 公司名稱
-        /// </summary>
-        /// <value>
-        /// The name of the company.
-        /// </value>
-        public string companyName { get; set; }
     }
 }

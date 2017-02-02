@@ -9,7 +9,7 @@ using System.Threading;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Configuration;
-namespace SyncSeomcMember
+namespace SyncSecomMember
 {
     class Program
     {
@@ -19,19 +19,19 @@ namespace SyncSeomcMember
             var db = new DW_CRMEntities();
             var transTime = db.F_SP_PROCESS.Where(x => x.SP_NAME == "F_CUST_ACCOUNT_CRM").FirstOrDefault();
             var lastTransTime = Convert.ToDateTime(transTime.LAST_TRANS_VALUE);
-            var memberdata = db.F_CUST_ACCOUNT_CRM.Where(x=>x.TRANS_DATE>=lastTransTime).ToList();
-            var companyData = db.F_CUST_ACCOUNT_CRM_BM.Where(x=>x.TRANS_DATE>=lastTransTime).ToList();
+            var memberdata = db.F_CUST_ACCOUNT_CRM.Where(x => x.TRANS_DATE >= lastTransTime).ToList();
+            var companyData = db.F_CUST_ACCOUNT_CRM_BM.Where(x => x.TRANS_DATE >= lastTransTime).ToList();
 
             List<int> termsList = new List<int>();
-          
 
-            var CreateMemberUrl = ConfigurationSettings.AppSettings[@"CreateMemberAPI"];
-            var first = ConfigurationSettings.AppSettings[@"first"];
+
+            var CreateMemberUrl = ConfigurationManager.AppSettings[@"CreateMemberAPI"];
+            var first = ConfigurationManager.AppSettings[@"first"];
 
 
             Console.WriteLine(CreateMemberUrl);
 
-           
+
             // 比較時間
             //var g = data.Where(x => x.TRANS_DATE >= lastTransTime);
             var memberTotal = memberdata.Count();
@@ -42,7 +42,7 @@ namespace SyncSeomcMember
             var log = new LogWriter("Test");
             var alreadyCount = 0;
             var alreadyCompanyCount = 0;
-            Console.WriteLine("本次作業歸戶共有:" + memberTotal + "筆"+ companyTotal + "商用戶共有:"+companyTotal);
+            Console.WriteLine("本次作業歸戶共有:" + memberTotal + "筆" + companyTotal + "商用戶共有:" + companyTotal);
             var total = 0;
             foreach (var c in memberdata)
             {
@@ -176,7 +176,7 @@ namespace SyncSeomcMember
                         }
                         catch (WebException e)
                         {
-
+                            Console.WriteLine(e.ToString());
                             goto retry;
 
                         }
@@ -234,7 +234,7 @@ namespace SyncSeomcMember
             foreach (var company in companyData)
             {
 
-                var AccountAPIUrl = ConfigurationSettings.AppSettings[@"CreateAccountAPI"];
+                var AccountAPIUrl = ConfigurationManager.AppSettings[@"CreateAccountAPI"];
 
                 var zipcode = 0;
 
@@ -303,55 +303,11 @@ namespace SyncSeomcMember
                     }
                     catch (WebException e)
                     {
-
+                        Console.WriteLine(e.ToString());
                         goto retry;
 
                     }
                 }
-
-
-
-                //var json = JsonConvert.SerializeObject(creatememberInfo);
-                //try
-                //{
-                //    HttpWebRequest request = HttpWebRequest.Create(AccountAPIUrl) as HttpWebRequest;
-                //    string result = null;
-                //    request.Method = "POST";    // 方法
-                //    request.KeepAlive = true; //是否保持連線
-                //    request.ContentType = "text/json";
-
-
-                //    byte[] bs = Encoding.UTF8.GetBytes(json);
-
-                //    using (Stream reqStream = request.GetRequestStream())
-                //    {
-                //        reqStream.Write(bs, 0, bs.Length);
-                //    }
-
-                //    using (WebResponse response = request.GetResponse())
-                //    {
-                //        request.Timeout = int.MaxValue;
-                //        using (StreamReader sr = new StreamReader(response.GetResponseStream()))
-                //        {
-                //            result = sr.ReadToEnd();
-                //            sr.Close();
-                //        }
-                //        response.Close();
-                //    }
-
-                //    //Console.WriteLine(result + total);
-                //    log.LogWrite(result + alreadyCount);
-                //    creatememberInfo.Clear();
-                //    Thread.Sleep(1000);
-
-                //}
-                //catch (WebException e)
-                //{
-
-                //    Console.WriteLine(e.ToString());
-
-                //}
-
 
 
             }
@@ -378,7 +334,7 @@ public class LogWriter
     }
     public void LogWrite(string logMessage)
     {
-        var logLocation = ConfigurationSettings.AppSettings[@"logLocation"];
+        var logLocation = ConfigurationManager.AppSettings[@"logLocation"];
         m_exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         try
         {
@@ -389,6 +345,7 @@ public class LogWriter
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.ToString());
         }
     }
 
@@ -405,6 +362,7 @@ public class LogWriter
         }
         catch (Exception ex)
         {
+            Console.WriteLine(ex.ToString());
         }
     }
 }
